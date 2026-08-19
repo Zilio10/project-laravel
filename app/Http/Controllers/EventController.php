@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+
 class EventController extends Controller
 {
     public function index()
     {
-        $nome = 'Henrique';
 
-        $nomes = ['Henrique', 'João', 'Pedro'];
+        $events = Event::all();
 
-        return view('welcome', ['nome' => $nome, 'nomes' => $nomes]);
+        return view('welcome', ['events' => $events]);
     }
 
-    public function create() {
+    public function create()
+    {
         return view('events.create');
     }
 }

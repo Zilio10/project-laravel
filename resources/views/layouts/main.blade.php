@@ -14,48 +14,64 @@
 
     <link rel="stylesheet" href="/css/styles.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <script src="/js/scripts.js"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="collapse navbar-collapse" id="navbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+
                 <a href="/" class="navbar-brand">
                     <img src="/img/hdcevents-logo.jpg" alt="HDC Events">
                 </a>
-                <ul>
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Eventos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/events/create" class="nav-link">Criar eventos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Entrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Cadastrar</a>
-                    </li>
-                </ul>
+
+                <div id="navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">Eventos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/events/create" class="nav-link">
+                                Criar eventos
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">
+                                Entrar
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">
+                                Cadastrar
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </nav>
     </header>
 
+
     @yield('content')
+
 
     <footer>
         <p>HDC Events &copy; 2026</p>
     </footer>
 
+
+    <script src="/js/scripts.js"></script>
+
     <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
+
 </body>
 
 </html>
