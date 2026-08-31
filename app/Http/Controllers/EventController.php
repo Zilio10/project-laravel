@@ -9,9 +9,16 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::all(); // Método para pegar todos os dados da tabela no banco
+        $search = request('search');
+        if ($search) {
+            $events = Event::where([
+                ['title', 'like', '%'.$search.'%'] // Obtém todos os eventos com a escrita parecida ("like") com a de $search
+            ])->get();
+        } else {
+            $events = Event::all(); // Método para pegar todos os dados da tabela no banco
+        }
 
-        return view('welcome', ['events' => $events]);
+        return view('welcome', ['events' => $events, 'search' => $search]);
     }
 
     public function create()
@@ -35,7 +42,7 @@ class EventController extends Controller
             $requestImage = $request->image;
 
             $extension = $requestImage->extension();
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $imageName = md5($requestImage->getClientOriginalName().strtotime('now')).'.'.$extension;
 
             $request->image->move(public_path('img/events'), $imageName);
 
@@ -50,7 +57,7 @@ class EventController extends Controller
 
     public function show($id)
     {
-        $event = Event::findOrFail($id);
+        $event = Event::findOrFail($id); // Método obter 1 registro do banco por PK
 
         return view('events.show', ['event' => $event]);
     }
