@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -50,6 +53,9 @@ class EventController extends Controller
 
         }
 
+        $user = Auth::user(); // Retorna um obj com os dados do usuário logado
+        $event->user_id = $user->id;
+
         $event->save(); // Método para salvar informações no banco
 
         return redirect('/')->with('msg', 'Evento criado com sucesso');
@@ -59,6 +65,8 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id); // Método obter 1 registro do banco por PK
 
-        return view('events.show', ['event' => $event]);
+        $eventOwner = User::where('id', $event->user_id)->first()->toArray(); // Retorna tudo do usuário que o id = $event->user_id
+
+        return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner]);
     }
 }
