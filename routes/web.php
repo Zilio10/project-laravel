@@ -8,18 +8,10 @@ Route::get('/', [EventController::class, 'index']); // Select all (all)
 Route::get('/events/create', [EventController::class, 'create'])->middleware('auth'); // Retorna view "create"
 Route::get('events/{id}', [EventController::class, 'show']); // Select one (findOrFail)
 Route::post('/events', [EventController::class, 'store']); // Create (save)
+Route::get('/', [EventController::class, 'index']); // Select all (all)
+Route::get('/dashboard', [EventController::class, 'dashboard'])->middleware('auth');
 
 Route::get('/contact', function() {
     return view('contact');
 });
 
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
