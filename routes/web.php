@@ -11,6 +11,8 @@ Route::post('/events', [EventController::class, 'store']); // Create (save)
 Route::get('/', [EventController::class, 'index']); // Select all (all)
 Route::get('/dashboard', [EventController::class, 'dashboard'])->middleware('auth');
 
+Route::delete('/events/{id}',[EventController::class, 'destroy'] );
+
 Route::get('/contact', function() {
     return view('contact');
 });
