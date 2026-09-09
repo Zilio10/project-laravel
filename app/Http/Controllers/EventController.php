@@ -76,7 +76,9 @@ class EventController extends Controller
 
         $events = $user->events; // Pela foreign key
 
-        return view('events.dashboard', ['events' => $events]);
+        $eventsAsParticipant = $user->eventsAsParticipant;
+
+        return view('events.dashboard', ['events' => $events, 'eventsAsParticipant' => $eventsAsParticipant]);
     }
 
     public function destroy($id)
@@ -88,7 +90,14 @@ class EventController extends Controller
 
     public function edit($id)
     {
+
+        $user = auth()->user();
+
         $event = Event::findOrFail($id);
+
+        if($user->id != $event->user->id) {
+            return redirect('/dashboard');
+        }
 
         return view('events.edit', ['event' => $event]);
     }
